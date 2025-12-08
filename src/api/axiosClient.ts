@@ -1,9 +1,11 @@
 // src/api/axiosClient.ts
 import axios from "axios";
 
-const baseURL =
+// Resolve API base URL and ensure it includes the /api prefix.
+const rawBase =
   (typeof import.meta !== "undefined" && import.meta.env?.VITE_API_URL) ||
   "http://localhost:5000/api";
+const baseURL = rawBase.endsWith("/api") ? rawBase : `${rawBase.replace(/\/$/, "")}/api`;
 
 const axiosClient = axios.create({
   baseURL,
